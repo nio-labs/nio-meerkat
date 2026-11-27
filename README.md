@@ -2,7 +2,7 @@
 
 [![License: BSL 1.1](https://img.shields.io/badge/License-BSL%201.1-blue.svg)](LICENSE)
 [![Engine: nio-xs](https://img.shields.io/badge/Engine-nio--xs-orange.svg)](https://github.com/nio-labs/nio-xs)
-[![Models: v0.6.4](https://img.shields.io/badge/Models-v0.6.4-emerald.svg)](https://github.com/nio-labs/nio-xs-models/releases/tag/v0.6.4)
+[![Models: v0.6.6](https://img.shields.io/badge/Models-v0.6.6-emerald.svg)](https://github.com/nio-labs/nio-xs-models/releases/tag/v0.6.6)
 [![Privacy: 100% Offline](https://img.shields.io/badge/Privacy-100%25%20Offline-purple.svg)](#quick-start)
 
 ## 💡 Why Nio Meerkat?
@@ -67,7 +67,7 @@ nioxs meerkat --memories
 
 | Tier | Command | Frozen Shared Bases | Herd Composition | Active RAM |
 | :--- | :--- | :--- | :--- | :---: |
-| **Tiny Meerkat (`16B`)** | `nioxs tiny-meerkat` | `135M` Scout + `135M` Builder (`202 MB`) | `60 × (135M + 135M)` (`Wave 1A/1B` + Waves 2–6) | `~334 MB` |
+| **Tiny Meerkat (`0.5B IQ3`)** | `nioxs tiny-meerkat` | `0.5B` Reflex (`319 MB`, `IQ3_XXS`) | Single `0.5B IQ3_XXS` + `0.5B` Wave 1 LoRAs (`60 × 0.5B`) | `~624 MB` |
 | **Meerkat (`120B`)** | `nioxs meerkat` | `0.5B` Scout + `1.5B` Builder (`1.32 GB`) | `60 × (0.5B + 1.5B)` (`Wave 1A/1B` 20 languages + Waves 2–6) | `~1,839–1,879 MB` |
 | **Meerkat Pro (`300B`)** | `nioxs meerkat --pro` | Base + `3.0B` Architect (`~3.2 GB`) | Inherits `0.5B + 1.5B` LoRAs + `3B` Architect LoRAs | `~3.2–3.8 GB` |
 | **Meerkat Ultra (`500B`)** | `nioxs meerkat --ultra` | Pro + `7.0B` Strategist (`~7.6 GB`) | Inherits `0.5B + 1.5B + 3B` LoRAs + `7B` Strategist LoRAs | `~6.5–7.5 GB` |
