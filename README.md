@@ -1,4 +1,4 @@
-# 🦡 Nio Meerkat — Self-Healing, Self-Growing vMicroLM-Growth Herd
+# 🦡 Nio Meerkat — Self-Healing Local AI Coding Agent & Adaptive Models
 
 [![License: BSL 1.1](https://img.shields.io/badge/License-BSL%201.1-blue.svg)](LICENSE)
 [![Engine: nio-xs](https://img.shields.io/badge/Engine-nio--xs-orange.svg)](https://github.com/nio-labs/nio-xs)
@@ -7,9 +7,9 @@
 
 ## 💡 Why Nio Meerkat?
 
-> **Why do small local models stay dumb forever? Because static weights can't learn after release.**
+> **Why do local AI coding agents and small models keep making the same mistakes? Because static weights can't learn from your codebase after release.**
 
-Every time a static `0.5B` or `1.5B` model hallucinates an API or fails a build, you fix it manually — and the model forgets everything on the next prompt. **Nio Meerkat (`vMicroLM-Growth`)** closes the **Detect → Heal → Grow** loop on your own machine:
+Every time a static `0.5B` or `1.5B` AI model hallucinates an API or fails a build, you fix it manually — and the model forgets everything on the next prompt. **Nio Meerkat** is a **self-healing, self-growing local AI coding agent and model pair (`vMicroLM-Growth`)** that closes the **Detect → Heal → Grow** loop on your own machine:
 1. **Detect:** A fast **`0.5B` Scout** (`380 MB`) handles chat in seconds and routes coding/complex tasks to a **`1.5B` Builder** (`941 MB`).
 2. **Heal:** When `--verify` catches a bug or a knowledge gap appears, Meerkat runs a bounded **4-tool loop** (`web_search`, `web_fetch`, `read_file`, `run_python`) and repairs itself (`--retries`).
 3. **Grow:** Verified fixes and `/teach` facts persist in `~/.nioxs/meerkat_memory.jsonl` + `meerkat_replay.jsonl` and consolidate into **`~10–20 MB` LoRA adapters** — scaling a `1.32 GB` base pair up to **`120B`–`500B` effective specialist capacity**.
