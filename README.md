@@ -18,11 +18,17 @@ Every time a static `0.5B` or `1.5B` model hallucinates an API or fails a build,
 
 ## 📊 Verified Benchmarks (Base Weights, Pre-Wave 1 LoRA)
 
-Evaluated on full `openai/openai_humaneval` (`164` tasks) and `google-research-datasets/mbpp` (`sanitized`, `100` tasks) on Modal L4 (`Q4_K_M`):
+Evaluated on full `openai/openai_humaneval` (`164` tasks) and `google-research-datasets/mbpp` (`sanitized`, `100` tasks) on Modal L4 (`Q4_K_M`) alongside published/evaluated baselines:
 
-| System | Active Params | HumanEval `pass@1` | HumanEval `1-Round Heal` | HumanEval `16-Round` | MBPP `pass@1` | MBPP `16-Round` |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Meerkat (`0.5B Scout + 1.5B Builder`)** | `0.5B / 1.5B` | `48.78%` (`80/164`) | `51.83%` (`85/164`) | **`75.61%` (`124/164`)** | `64.0%` (`64/100`) | **`79.0%` (`79/100`)** |
+| System | Active Params | HumanEval `pass@1` | HumanEval `1-Round Heal` | HumanEval `16-Round` | MBPP `pass@1` | MBPP `16-Round` | Host RAM |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Stock `Qwen2.5-Coder-7B` (`INT4`) | `7.0B` | — | — | `84.15%` (`138/164`) | — | `84.0%` (`84/100`) | — |
+| **Meerkat (`0.5B Scout + 1.5B Builder`)** | `0.5B / 1.5B` | `48.78%` (`80/164`) | `51.83%` (`85/164`) | **`75.61%` (`124/164`)** | `64.0%` (`64/100`) | **`79.0%` (`79/100`)** | **`~1.8 GB`** |
+| `SmolLM2-1.7B-Instruct` (`FP16`)* | `1.7B` | `~37.2%` | — | — | — | — | `~3.4 GB` |
+| **Tiny Meerkat (`2× 135M`)** | `135M` | `6.10%` (`10/164`) | `6.10%` (`10/164`) | **`10.37%` (`17/164`)** | `11.0%` (`11/100`) | **`26.0%` (`26/100`)** | **`~250 MB`** |
+| `SmolLM2-135M-Instruct` (`FP16`)* | `135M` | `~7.9%` | — | — | — | — | `~300 MB` |
+
+*\*Published single-shot `pass@1` baselines from HuggingFaceTB (`SmolLM2`) and `nio-orca` (`Qwen2.5-Coder-7B INT4`).*
 
 ---
 
@@ -60,6 +66,7 @@ nioxs meerkat --memories
 
 | Tier | Command | Frozen Shared Bases | Herd Composition | Active RAM |
 | :--- | :--- | :--- | :--- | :---: |
+| **Tiny Meerkat (`16B`)** | `nioxs tiny-meerkat` | `135M` Scout + `135M` Builder (`202 MB`) | `60 × (135M + 135M)` (`Wave 1A/1B` + Waves 2–6) | `~250 MB` |
 | **Meerkat (`120B`)** | `nioxs meerkat` | `0.5B` Scout + `1.5B` Builder (`1.32 GB`) | `60 × (0.5B + 1.5B)` (`Wave 1A/1B` 20 languages + Waves 2–6) | `~1.8 GB` |
 | **Meerkat Pro (`300B`)** | `nioxs meerkat --pro` | Base + `3.0B` Architect (`~3.2 GB`) | Inherits `0.5B + 1.5B` LoRAs + `3B` Architect LoRAs | `~3.2–3.8 GB` |
 | **Meerkat Ultra (`500B`)** | `nioxs meerkat --ultra` | Pro + `7.0B` Strategist (`~7.6 GB`) | Inherits `0.5B + 1.5B + 3B` LoRAs + `7B` Strategist LoRAs | `~6.5–7.5 GB` |
