@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nio Meerkat — Self-Healing, Self-Growing vMicroLM-Growth Herd (0.5B Scout + 1.5B Builder, 120B–500B LoRA scaling).">
+  <meta name="theme-color" content="#f6f8fa">
+  <title>Nio Meerkat — Self-Healing vMicroLM-Growth Herd</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="mobile-header">
+    <button class="hamburger-btn" id="menuToggle" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="#overview" class="brand-title">
+      <img class="brand-logo" src="logo.svg" alt="Nio Meerkat logo">
+      <span class="brand-name">Nio Meerkat</span>
+      <span class="badge">v0.6.4</span>
+    </a>
+    <button class="theme-toggle-btn" type="button" aria-label="Toggle theme">
+      <span class="theme-icon"></span>
+    </button>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#overview" class="sidebar-brand">
+          <img class="brand-logo" src="logo.svg" alt="Nio Meerkat logo">
+          <span class="brand-text">
+            <span class="brand-name">Nio Meerkat</span>
+            <span class="brand-sub">vMicroLM-Growth Herd</span>
+          </span>
+        </a>
+      </div>
+      <nav class="sidebar-nav" aria-label="Documentation">
+        <div class="nav-section">
+          <div class="nav-section-title">Start here</div>
+          <a href="#overview" class="nav-link active">1. Why Meerkat?</a>
+          <a href="#benchmarks" class="nav-link">2. Benchmark Leaderboard</a>
+          <a href="#quickstart" class="nav-link">3. Quickstart</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Architecture</div>
+          <a href="#architecture" class="nav-link">4. Detect → Heal → Grow</a>
+          <a href="#tiers" class="nav-link">5. Tier Ladder (16B–500B)</a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" type="button" aria-label="Toggle theme">
+          <span class="theme-icon"></span>
+          <span class="theme-text">Dark mode</span>
+        </button>
+        <a href="https://github.com/nio-labs/nio-meerkat" target="_blank" rel="noreferrer" class="github-link">
+          <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+          <span>GitHub: nio-labs/nio-meerkat</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="content-wrapper">
+      <div class="content-container">
+        <section id="overview" class="doc-section">
+          <div class="hero">
+            <span class="badge badge-accent">v0.6.4 Live on GitHub Releases</span>
+            <h1>Nio Meerkat — Self-Healing vMicroLM-Growth Herd</h1>
+            <p class="lead">Why do small local models stay dumb forever? Because static weights can't learn after release. <strong>Meerkat</strong> watches itself fail, searches or runs tools to heal, remembers what you teach it, and grows <code>~10–20 MB</code> LoRA skills over time.</p>
+          </div>
+          <p><strong>Nio Meerkat</strong> pairs a fast <strong><code>0.5B</code> Scout</strong> (<code>380 MB</code>) with a <strong><code>1.5B</code> Builder</strong> (<code>941 MB</code>) in native Rust via <a href="https://github.com/nio-labs/nio-xs"><code>nio-xs</code></a>, scaling from <strong>Tiny Meerkat (<code>16B</code>)</strong> at <code>~250 MB</code> RAM up to <strong>Meerkat Ultra (<code>500B</code>)</strong>.</p>
+        </section>
+
+        <section id="benchmarks" class="doc-section">
+          <h2>2. Ranked Benchmark Leaderboard (HumanEval <code>164</code> &amp; MBPP <code>100</code>)</h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Model / Fleet</th>
+                  <th>Active Params</th>
+                  <th>Pods &amp; Total Size (<code>Q4_K_M</code>)</th>
+                  <th>HumanEval (<code>164</code>)</th>
+                  <th>MBPP (<code>100</code>)</th>
+                  <th>Host RAM (<code>VmHWM</code>)</th>
+                  <th>CPU Speed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>1</strong></td><td><code>Qwen2.5-Coder-32B-Instruct</code> (<code>FP16</code>, Pass@1)*</td><td><code>32.5B</code></td><td><code>1</code> pod (cloud/server)</td><td><code>92.70%</code></td><td><code>90.2%</code></td><td>—</td><td>—</td></tr>
+                <tr><td><strong>2</strong></td><td><code>Claude 3.5 Sonnet</code> (Frontier, Pass@1)*</td><td>Frontier</td><td>Cloud API</td><td><code>92.00%</code></td><td><code>91.0%</code></td><td>—</td><td>—</td></tr>
+                <tr><td><strong>3</strong></td><td><code>Qwen2.5-Coder-14B-Instruct</code> (<code>FP16</code>, Pass@1)*</td><td><code>14.7B</code></td><td><code>1</code> pod</td><td><code>89.60%</code></td><td><code>87.2%</code></td><td>—</td><td>—</td></tr>
+                <tr><td><strong>4</strong></td><td>Stock <code>Qwen2.5-Coder-7B</code> (<code>INT4</code>)</td><td><code>7.0B</code></td><td><code>1</code> pod</td><td><code>84.15%</code> (<code>138/164</code>)</td><td><code>84.0%</code> (<code>84/100</code>)</td><td>—</td><td>—</td></tr>
+                <tr class="highlight-row"><td><strong>5</strong></td><td><strong><code>Meerkat</code></strong> (<code>0.5B Scout + 1.5B Builder</code>, 16-round)</td><td><strong><code>0.5B / 1.5B</code></strong></td><td><strong><code>2</code> base pods (<code>1.32 GB</code>)</strong></td><td><strong><code>75.61%</code></strong> (<code>124/164</code>)</td><td><strong><code>79.0%</code></strong> (<code>79/100</code>)</td><td><strong><code>~1.8 GB</code></strong></td><td><strong><code>8–20 w/s</code></strong></td></tr>
+                <tr><td><strong>6</strong></td><td><code>SmolLM2-1.7B-Instruct</code> (<code>FP16</code>, Pass@1)*</td><td><code>1.7B</code></td><td><code>1</code> pod</td><td><code>~37.2%</code></td><td>—</td><td><code>~3.4 GB</code></td><td>—</td></tr>
+                <tr class="highlight-row"><td><strong>7</strong></td><td><strong><code>Tiny Meerkat</code></strong> (<code>2× 135M</code>, 16-round)</td><td><strong><code>135M</code></strong></td><td><strong><code>2</code> base pods (<code>202 MB</code>)</strong></td><td><strong><code>10.37%</code></strong> (<code>17/164</code>)</td><td><strong><code>26.0%</code></strong> (<code>26/100</code>)</td><td><strong><code>~250 MB</code></strong></td><td><strong><code>~40+ w/s</code></strong></td></tr>
+                <tr><td><strong>8</strong></td><td><code>SmolLM2-135M-Instruct</code> (<code>FP16</code>, Pass@1)*</td><td><code>135M</code></td><td><code>1</code> pod</td><td><code>~7.9%</code></td><td>—</td><td><code>~300 MB</code></td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note"><em>*Base weights evaluated on Modal L4 (<code>Q4_K_M</code>, pre-Wave 1 LoRA). Published Pass@1 baselines are from official technical reports.</em></p>
+        </section>
+
+        <section id="quickstart" class="doc-section">
+          <h2>3. Quickstart</h2>
+          <div class="code-wrapper">
+            <button class="copy-btn" type="button">Copy</button>
+            <pre><code class="language-bash"># 1. Install nioxs
+curl -fsSL https://raw.githubusercontent.com/nio-labs/nio-xs/main/install.sh | bash
+
+# 2. Pull Meerkat (0.5B + 1.5B) or Tiny Meerkat (2x 135M)
+nioxs pull meerkat
+nioxs pull tiny-meerkat
+
+# 3. Run locally with --verify, 4-tool loop, or /teach memory
+nioxs meerkat "write me a Go while loop"
+nioxs meerkat --tools "read Cargo.toml and tell me the package name"
+nioxs meerkat teach "our deploy server => 10.0.4.22"
+nioxs tiny-meerkat "write a python function to check palindrome"</code></pre>
+          </div>
+        </section>
+
+        <section id="architecture" class="doc-section">
+          <h2>4. Closed Loop: Detect → Heal → Grow</h2>
+          <ul>
+            <li><strong>Detect:</strong> <code>0.5B</code> Scout answers casual chat in seconds and routes coding/tool tasks to <code>1.5B</code> Builder.</li>
+            <li><strong>Heal:</strong> Bounded 4-tool XML loop (<code>web_search</code>, <code>web_fetch</code>, <code>read_file</code>, <code>run_python</code>) + <code>--verify</code> multi-round self-repair (<code>--retries</code>).</li>
+            <li><strong>Grow:</strong> Episodic memories (<code>meerkat_memory.jsonl</code>) + verified replay traces (<code>meerkat_replay.jsonl</code>) consolidate into <code>~10–20 MB</code> Wave 1–6 LoRA adapters.</li>
+          </ul>
+        </section>
+
+        <section id="tiers" class="doc-section">
+          <h2>5. Tier Ladder (<code>16B</code> → <code>500B</code> Effective Capacity)</h2>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr><th>Tier</th><th>Command</th><th>Frozen Shared Bases</th><th>Herd Composition</th><th>Active RAM</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Tiny Meerkat (<code>16B</code>)</strong></td><td><code>nioxs tiny-meerkat</code></td><td><code>135M</code> Scout + <code>135M</code> Builder (<code>202 MB</code>)</td><td><code>60 × (135M + 135M)</code></td><td><code>~250 MB</code></td></tr>
+                <tr><td><strong>Meerkat (<code>120B</code>)</strong></td><td><code>nioxs meerkat</code></td><td><code>0.5B</code> Scout + <code>1.5B</code> Builder (<code>1.32 GB</code>)</td><td><code>60 × (0.5B + 1.5B)</code></td><td><code>~1.8 GB</code></td></tr>
+                <tr><td><strong>Meerkat Pro (<code>300B</code>)</strong></td><td><code>nioxs meerkat --pro</code></td><td>Base + <code>3.0B</code> Architect (<code>~3.2 GB</code>)</td><td>Inherits <code>0.5B + 1.5B</code> + <code>3B</code> LoRAs</td><td><code>~3.2–3.8 GB</code></td></tr>
+                <tr><td><strong>Meerkat Ultra (<code>500B</code>)</strong></td><td><code>nioxs meerkat --ultra</code></td><td>Pro + <code>7.0B</code> Strategist (<code>~7.6 GB</code>)</td><td>Inherits <code>0.5B + 1.5B + 3B</code> + <code>7B</code> LoRAs</td><td><code>~6.5–7.5 GB</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

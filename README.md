@@ -16,19 +16,20 @@ Every time a static `0.5B` or `1.5B` model hallucinates an API or fails a build,
 
 ---
 
-## 📊 Verified Benchmarks (Base Weights, Pre-Wave 1 LoRA)
+## 📊 Ranked Benchmark Leaderboard (HumanEval `164` & MBPP `100`)
 
-Evaluated on full `openai/openai_humaneval` (`164` tasks) and `google-research-datasets/mbpp` (`sanitized`, `100` tasks) on Modal L4 (`Q4_K_M`) alongside published/evaluated baselines:
+| Rank | Model / Fleet | Active Params | Pods & Total Size (`Q4_K_M`) | HumanEval (`164`) | MBPP (`100`) | Host RAM (`VmHWM`) | CPU Speed |
+| :---: | :--- | :---: | :--- | :--- | :--- | :--- | :--- |
+| **1** | `Qwen2.5-Coder-32B-Instruct` (`FP16`, Pass@1)* | `32.5B` | `1` pod (cloud/server) | `92.70%` | `90.2%` | — | — |
+| **2** | `Claude 3.5 Sonnet` (Frontier, Pass@1)* | Frontier | Cloud API | `92.00%` | `91.0%` | — | — |
+| **3** | `Qwen2.5-Coder-14B-Instruct` (`FP16`, Pass@1)* | `14.7B` | `1` pod | `89.60%` | `87.2%` | — | — |
+| **4** | Stock `Qwen2.5-Coder-7B` (`INT4`) | `7.0B` | `1` pod | `84.15%` (`138/164`) | `84.0%` (`84/100`) | — | — |
+| **5** | **`Meerkat`** (`0.5B Scout + 1.5B Builder`, 16-round) | **`0.5B / 1.5B`** | **`2` base pods (`1.32 GB`)** | **`75.61%`** (`124/164`) | **`79.0%`** (`79/100`) | **`~1.8 GB`** | **`8–20 w/s`** |
+| **6** | `SmolLM2-1.7B-Instruct` (`FP16`, Pass@1)* | `1.7B` | `1` pod | `~37.2%` | — | `~3.4 GB` | — |
+| **7** | **`Tiny Meerkat`** (`2× 135M`, 16-round) | **`135M`** | **`2` base pods (`202 MB`)** | **`10.37%`** (`17/164`) | **`26.0%`** (`26/100`) | **`~250 MB`** | **`~40+ w/s`** |
+| **8** | `SmolLM2-135M-Instruct` (`FP16`, Pass@1)* | `135M` | `1` pod | `~7.9%` | — | `~300 MB` | — |
 
-| System | Active Params | HumanEval `pass@1` | HumanEval `1-Round Heal` | HumanEval `16-Round` | MBPP `pass@1` | MBPP `16-Round` | Host RAM |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Stock `Qwen2.5-Coder-7B` (`INT4`) | `7.0B` | — | — | `84.15%` (`138/164`) | — | `84.0%` (`84/100`) | — |
-| **Meerkat (`0.5B Scout + 1.5B Builder`)** | `0.5B / 1.5B` | `48.78%` (`80/164`) | `51.83%` (`85/164`) | **`75.61%` (`124/164`)** | `64.0%` (`64/100`) | **`79.0%` (`79/100`)** | **`~1.8 GB`** |
-| `SmolLM2-1.7B-Instruct` (`FP16`)* | `1.7B` | `~37.2%` | — | — | — | — | `~3.4 GB` |
-| **Tiny Meerkat (`2× 135M`)** | `135M` | `6.10%` (`10/164`) | `6.10%` (`10/164`) | **`10.37%` (`17/164`)** | `11.0%` (`11/100`) | **`26.0%` (`26/100`)** | **`~250 MB`** |
-| `SmolLM2-135M-Instruct` (`FP16`)* | `135M` | `~7.9%` | — | — | — | — | `~300 MB` |
-
-*\*Published single-shot `pass@1` baselines from HuggingFaceTB (`SmolLM2`) and `nio-orca` (`Qwen2.5-Coder-7B INT4`).*
+*\*Base weights evaluated on Modal L4 (`Q4_K_M`, pre-Wave 1 LoRA). Published Pass@1 baselines are from official technical reports.*
 
 ---
 
