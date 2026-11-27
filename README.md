@@ -5,7 +5,14 @@
 [![Models: v0.6.4](https://img.shields.io/badge/Models-v0.6.4-emerald.svg)](https://github.com/nio-labs/nio-xs-models/releases/tag/v0.6.4)
 [![Privacy: 100% Offline](https://img.shields.io/badge/Privacy-100%25%20Offline-purple.svg)](#quick-start)
 
-> **Detect → Heal → Grow:** **Nio Meerkat** pairs a **`0.5B` Scout** (`380 MB`) with a **`1.5B` Builder** (`941 MB`) in a closed self-healing loop with episodic memory (`meerkat_memory.jsonl`), a bounded 4-tool XML loop (`web_search`, `web_fetch`, `read_file`, `run_python`), `--verify` self-repair, and modular `~10–20 MB` LoRA herd scaling (`120B` → `300B Pro` → `500B Ultra`).
+## 💡 Why Nio Meerkat?
+
+> **Why do small local models stay dumb forever? Because static weights can't learn after release.**
+
+Every time a static `0.5B` or `1.5B` model hallucinates an API or fails a build, you fix it manually — and the model forgets everything on the next prompt. **Nio Meerkat (`vMicroLM-Growth`)** closes the **Detect → Heal → Grow** loop on your own machine:
+1. **Detect:** A fast **`0.5B` Scout** (`380 MB`) handles chat in seconds and routes coding/complex tasks to a **`1.5B` Builder** (`941 MB`).
+2. **Heal:** When `--verify` catches a bug or a knowledge gap appears, Meerkat runs a bounded **4-tool loop** (`web_search`, `web_fetch`, `read_file`, `run_python`) and repairs itself (`--retries`).
+3. **Grow:** Verified fixes and `/teach` facts persist in `~/.nioxs/meerkat_memory.jsonl` + `meerkat_replay.jsonl` and consolidate into **`~10–20 MB` LoRA adapters** — scaling a `1.32 GB` base pair up to **`120B`–`500B` effective specialist capacity**.
 
 ---
 
@@ -39,6 +46,9 @@ nioxs meerkat "write me a Go while loop"
 # Bounded 4-tool agentic loop (read_file, run_python, web_search, web_fetch)
 nioxs meerkat --tools "read Cargo.toml and tell me the package name"
 
+# Multi-round --verify self-repair
+nioxs meerkat --retries 16 "implement topological sort with cycle detection in Python"
+
 # Instant SimSimi-style episodic memory teaching
 nioxs meerkat teach "our deploy server => 10.0.4.22"
 nioxs meerkat --memories
@@ -54,7 +64,7 @@ nioxs meerkat --memories
 | **Meerkat Pro (`300B`)** | `nioxs meerkat --pro` | Base + `3.0B` Architect (`~3.2 GB`) | Inherits `0.5B + 1.5B` LoRAs + `3B` Architect LoRAs | `~3.2–3.8 GB` |
 | **Meerkat Ultra (`500B`)** | `nioxs meerkat --ultra` | Pro + `7.0B` Strategist (`~7.6 GB`) | Inherits `0.5B + 1.5B + 3B` LoRAs + `7B` Strategist LoRAs | `~6.5–7.5 GB` |
 
-For ultra-compact `135M` (`~250 MB` RAM) models, see [**Nio Tiny**](https://github.com/nio-labs/nio-tiny).
+For ultra-compact `135M` (`~250 MB` RAM) edge models, see [**Nio Tiny**](https://github.com/nio-labs/nio-tiny).
 
 ---
 
