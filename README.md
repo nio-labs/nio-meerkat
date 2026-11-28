@@ -25,9 +25,9 @@ Every time a static `0.5B` or `1.5B` AI model hallucinates an API or fails a bui
 | **3** | `Qwen2.5-Coder-14B-Instruct` (`FP16`, Pass@1)* | `14.7B` | `1` pod | `89.60%` | `87.2%` | — | — |
 | **4** | Stock `Qwen2.5-Coder-7B` (`INT4`) | `7.0B` | `1` pod | `84.15%` (`138/164`) | `84.0%` (`84/100`) | — | — |
 | **5** | **`Mink`** (`0.5B Scout + 1.5B Builder`, 16-round) | **`0.5B / 1.5B`** | **`2` base pods (`1.32 GB`)** | **`75.61%`** (`124/164`) | **`79.0%`** (`79/100`) | **`~1,839–1,879 MB`** | **`8–20 w/s`** |
-| **6** | **`Mink-S`** (`0.5B IQ3_XXS`, 16-round) | **`0.5B`** | **`1` pod (`319 MB`)** | **`67.68%`** (`111/164`) | **`70.0%`** (`70/100`) | **`624.1 MB`** | **`~15–25 w/s`** |
+| **6** | **`Mink S`** (`0.5B IQ3_XXS`, 16-round) | **`0.5B`** | **`1` pod (`319 MB`)** | **`67.68%`** (`111/164`) | **`70.0%`** (`70/100`) | **`624.1 MB`** | **`~15–25 w/s`** |
 | **7** | `SmolLM2-1.7B-Instruct` (`FP16`, Pass@1)* | `1.7B` | `1` pod | `~37.2%` | — | `~3.4 GB` | — |
-| **8** | **`Mink-XS`** (`2× 135M`, 16-round) | **`135M`** | **`2` base pods (`202 MB`)** | **`10.37%`** (`17/164`) | **`26.0%`** (`26/100`) | **`~334 MB`** | **`~40+ w/s`** |
+| **8** | **`Mink XS`** (`2× 135M`, 16-round) | **`135M`** | **`2` base pods (`202 MB`)** | **`10.37%`** (`17/164`) | **`26.0%`** (`26/100`) | **`~334 MB`** | **`~40+ w/s`** |
 | **9** | `SmolLM2-135M-Instruct` (`FP16`, Pass@1)* | `135M` | `1` pod | `~7.9%` | — | `~300 MB` | — |
 
 *\*Base weights evaluated on Modal L4 (`Q4_K_M`, pre-Wave 1 LoRA). Published Pass@1 baselines are from official technical reports.*
@@ -68,11 +68,11 @@ nioxs mink --memories
 
 | Tier | Command | Frozen Shared Bases | Herd Composition | Active RAM |
 | :--- | :--- | :--- | :--- | :---: |
-| **Mink-XS (`16B`)** | `nioxs mink-xs` | `135M` Scout + `135M` Builder (`202 MB`) | `2×135M` edge companion (chat, Q&A, light scripts) | `~334 MB` |
-| **Mink-S (`0.5B IQ3`)** | `nioxs mink-s` | `0.5B` Reflex (`319 MB`, `IQ3_XXS`) | Single `0.5B IQ3_XXS` + `0.5B` Wave 1 LoRAs (`60 × 0.5B`) | `624.1 MB` |
+| **Mink XS (`16B`)** | `nioxs mink-xs` | `135M` Scout + `135M` Builder (`202 MB`) | `2×135M` edge companion (chat, Q&A, light scripts) | `~334 MB` |
+| **Mink S (`0.5B IQ3`)** | `nioxs mink-s` | `0.5B` Reflex (`319 MB`, `IQ3_XXS`) | Single `0.5B IQ3_XXS` + `0.5B` Wave 1 LoRAs (`60 × 0.5B`) | `624.1 MB` |
 | **Mink (`120B`)** | `nioxs mink` | `0.5B` Scout + `1.5B` Builder (`1.32 GB`) | `60 × (0.5B + 1.5B)` (`Wave 1A/1B` 20 languages + Waves 2–6) | `~1,839–1,879 MB` |
-| **Mink-Pro (`300B`)** | `nioxs mink --pro` | Base + `3.0B` Architect (`~3.2 GB`) | Inherits `0.5B + 1.5B` LoRAs + `3B` Architect LoRAs | `~3.2–3.8 GB` |
-| **Mink-Ultra (`500B`)** | `nioxs mink --ultra` | Pro + `7.0B` Strategist (`~7.6 GB`) | Inherits `0.5B + 1.5B + 3B` LoRAs + `7B` Strategist LoRAs | `~6.5–7.5 GB` |
+| **Mink Pro (`300B`)** | `nioxs mink --pro` | Base + `3.0B` Architect (`~3.2 GB`) | Inherits `0.5B + 1.5B` LoRAs + `3B` Architect LoRAs | `~3.2–3.8 GB` |
+| **Mink Ultra (`500B`)** | `nioxs mink --ultra` | Pro + `7.0B` Strategist (`~7.6 GB`) | Inherits `0.5B + 1.5B + 3B` LoRAs + `7B` Strategist LoRAs | `~6.5–7.5 GB` |
 
 For ultra-compact `135M` (`~250 MB` RAM) edge models, see [**Nio Tiny**](https://github.com/nio-labs/nio-tiny).
 
